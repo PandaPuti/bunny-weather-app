@@ -5,11 +5,12 @@ const WeatherCanvas = ({ weatherState }) => {
   const { color, state } = weatherState;
 
   const bunnyVariants = {
-    SUNNY: { x: 220, y: 160, scale: 1, opacity: 1 },
-    CLOUDY: { x: 200, y: 160, scale: 1, opacity: 1 },
-    RAINY: { x: 85, y: 160, scale: 0.9, opacity: 1 },
-    STORMY: { x: 50, y: 160, scale: 0.8, opacity: 0 }, // Hiding
-  };
+  SUNNY: { x: 220, y: 160, scale: 1, opacity: 1 },
+  CLOUDY: { x: 200, y: 160, scale: 1, opacity: 1 },
+  RAINY: { x: 85, y: 160, scale: 0.9, opacity: 1 },
+  STORMY: { x: 50, y: 160, scale: 0.8, opacity: 0 },
+  FOGGY: { x: 150, y: 160, scale: 1, opacity: 0.8 } // Bunny looks a bit faded in fog
+};
 
   return (
     <div className="relative w-full max-w-2xl aspect-video rounded-3xl overflow-hidden shadow-2xl border-8 border-white bg-slate-200">
@@ -28,6 +29,45 @@ const WeatherCanvas = ({ weatherState }) => {
             <circle cx="340" cy="40" r="20" fill="yellow" className="animate-pulse" opacity="0.4" />
             <circle cx="340" cy="40" r="12" fill="#FFD700" />
           </motion.g>
+        )}
+
+        {/* CLOUDS - For Cloudy, Rainy, and Foggy states */}
+        {(state === 'CLOUDY' || state === 'RAINY' || state === 'FOGGY') && (
+          <g>
+            {/* Cloud 1 */}
+            <motion.g
+              initial={{ x: -50 }}
+              animate={{ x: 450 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            >
+              <circle cx="50" cy="50" r="15" fill="white" opacity="0.8" />
+              <circle cx="70" cy="50" r="20" fill="white" opacity="0.8" />
+              <circle cx="90" cy="50" r="15" fill="white" opacity="0.8" />
+            </motion.g>
+
+            {/* Cloud 2 - Different speed and height */}
+            <motion.g
+              initial={{ x: 400 }}
+              animate={{ x: -100 }}
+              transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+            >
+              <circle cx="150" cy="80" r="10" fill="white" opacity="0.5" />
+              <circle cx="165" cy="80" r="15" fill="white" opacity="0.5" />
+              <circle cx="180" cy="80" r="10" fill="white" opacity="0.5" />
+            </motion.g>
+          </g>
+        )}
+
+        {/* FOG/HAZE OVERLAY */}
+        {state === 'FOGGY' && (
+          <motion.rect
+            width="400"
+            height="225"
+            fill="white"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }}
+            transition={{ duration: 2 }}
+          />
         )}
 
         {/* GRASS FIELD */}

@@ -12,7 +12,7 @@ const WeatherCard = ({ data, city }) => {
             <MapPin size={16} />
             <span className="text-xs font-bold uppercase tracking-widest">{city}</span>
           </div>
-          <h2 className="text-5xl font-black text-gray-800">{data.temp}°</h2>
+          <h2 className="text-5xl font-black text-gray-800">{data.temp}°C</h2>
         </div>
         <div className="text-right">
           <p className="text-lg font-bold text-gray-700 capitalize">{data.description}</p>
@@ -27,7 +27,7 @@ const WeatherCard = ({ data, city }) => {
           </div>
           <div>
             <p className="text-[10px] text-gray-400 uppercase font-bold">Humidity</p>
-            <p className="font-bold text-gray-700">60%</p> {/* Hardcoded for now or add to hook */}
+            <p className="font-bold text-gray-700">{data.humidity}%</p> {/* Hardcoded for now or add to hook */}
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -36,7 +36,7 @@ const WeatherCard = ({ data, city }) => {
           </div>
           <div>
             <p className="text-[10px] text-gray-400 uppercase font-bold">Wind Speed</p>
-            <p className="font-bold text-gray-700">12 km/h</p>
+            <p className="font-bold text-gray-700">{data.wind} km/h</p>
           </div>
         </div>
       </div>

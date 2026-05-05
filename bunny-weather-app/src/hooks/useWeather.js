@@ -24,6 +24,9 @@ export const useWeather = (city) => {
           temp: Math.round(result.main.temp),
           condition: result.weather[0].main,
           description: result.weather[0].description,
+          wind: result.wind.speed,
+          humidity:result.main.humidity,
+          result: result,
         });
       } catch (err) {
         setError(err.message);

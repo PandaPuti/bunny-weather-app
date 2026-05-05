@@ -10,6 +10,7 @@ import AINarrator from './components/AINarrator';
 function App() {
   const [city, setCity] = useState('Mumbai'); // Default city
   const { data, loading, error } = useWeather(city);
+  console.log(data);
   const { thought, isThinking, generateThought } = useAINarrator();
 
   useEffect(() => {
