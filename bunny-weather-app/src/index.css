@@ -8,7 +8,25 @@ body {
   background: #f0f0f0;
 }
 
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
 
+@keyframes twitch {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  93% { transform: rotate(10deg); }
+  96% { transform: rotate(-10deg); }
+}
+
+.animate-sway {
+  animation: sway 3s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.animate-twitch {
+  animation: twitch 4s ease-in-out infinite;
+}
 
     
 
