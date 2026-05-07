@@ -73,6 +73,17 @@ src/
 │   └── conversions.js      # Metric to Imperial (Celsius to Fahrenheit) logic
 └── App.jsx                 # Main Orchestrator & State Manager
 
+
+## 📸 App Preview
+
+| Sunny Afternoon | Golden Hour | Night Time |
+| :---: | :---: | :---: |
+| ![Sunny Mode](screenshots/sunny.png) | ![Golden Hour](screenshots/golden-hour.png) | ![Night Mode](screenshots/night.png) |
+
+| Rainy Weather | Haze/Mist State |
+| :---: | :---: |
+| ![Rainy Mode](screenshots/rain.png) | ![Haze Mode](screenshots/haze.png) |
+
 📄 License
 Distributed under the MIT License.
 
@@ -80,3 +91,4 @@ Distributed under the MIT License.
 Bunny Inspiration: Created for developers who love clean SVGs and cozy vibes.
 
 Google Gemini: For providing the "brains" behind the bunny.
+
