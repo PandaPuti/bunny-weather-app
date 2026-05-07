@@ -11,6 +11,8 @@ import AINarrator from './components/AINarrator';
 function App() {
   const fallbackCity = 'Mumbai';
   const [city, setCity] = useState(fallbackCity);
+  const [inputCity, setInputCity] = useState('');
+  const [bgColor, setBgColor] = useState('#f8fafc'); // Default slate-50
   const { data, loading, error } = useWeather(city);
   // console.log(data);
   const { thought, isThinking, generateThought } = useAINarrator();
@@ -50,21 +52,29 @@ function App() {
 
   useEffect(() => {
     if (data) {
-      const { action } = getBunnyState(data.condition);
-      generateThought(`${data.temp}°C and ${data.description}`, action);
+      const { color, action } = getBunnyState(data.condition);
+      generateThought(`${data.temp}°C and ${data.description}`, action, data.condition);
+      setBgColor(color);
     }
   }, [data]);
   
   const dayTimeStatus = data ? isDaytime(data.dt, data.sunrise, data.sunset) : true;
   return (
-  <div className="min-h-screen bg-slate-50 flex flex-col items-center p-6 gap-6 font-sans">
+  <div className="min-h-screen flex flex-col items-center p-6 gap-6 font-sans" style={{ backgroundColor: bgColor }}>
     {/* Search Input */}
     <div className="w-full max-w-md flex gap-2">
       <input 
         type="text" 
+        value={inputCity}
+        onChange={(e) => setInputCity(e.target.value)}
         className="flex-1 px-5 py-3 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-blue-400 outline-none"
         placeholder="Enter a city (e.g. Kolkata, London)..."
-        onKeyDown={(e) => e.key === 'Enter' && setCity(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && inputCity.trim()) {
+            setCity(inputCity.trim());
+            setInputCity('');
+          }
+        }}
       />
     </div>
 

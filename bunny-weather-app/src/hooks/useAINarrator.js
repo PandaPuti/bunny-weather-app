@@ -7,7 +7,18 @@ export const useAINarrator = () => {
   const [thought, setThought] = useState("");
   const [isThinking, setIsThinking] = useState(false);
 
-  const generateThought = async (weatherInfo, bunnyAction) => {
+  const weatherStateThought = {
+    Clear: "Clear blue sky, warm sun on my fur—time for a joyful, care-free hop!",
+    Haze: "Too hazy to hop, too stuffy to stop—time for a shady nap and a carrot-munching session inside.",
+    Clouds: "Perfect weather for a cozy, long nap at home.",
+    Rain: "Too wet to hop, too gloomy to play, I guess I'll nap the rain away",
+    Drizzle:"Damp nose, wet toes, guess it's time for a long, cozy nap inside.",
+    Thunderstrom:"Is the sky thumping back at me because I didn't finish my hay?",
+    Mist:"The world has turned into a soft, quiet carrot, just waiting to be nibbled.",
+    Storm: "Need to find a deep, dry hole fast before my ears turn into wind sails!",
+  };
+
+  const generateThought = async (weatherInfo, bunnyAction, weatherCondition) => {
     setIsThinking(true);
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
@@ -21,7 +32,8 @@ export const useAINarrator = () => {
       setThought(response.text());
     } catch (error) {
       console.error("AI Error:", error);
-      setThought("I hope my carrots don't get too wet...");
+
+      setThought(weatherStateThought[weatherCondition]);
     } finally {
       setIsThinking(false);
     }
