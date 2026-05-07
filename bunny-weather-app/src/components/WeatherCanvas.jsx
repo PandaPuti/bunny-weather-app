@@ -1,11 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const WeatherCanvas = ({ weatherState, isDay, windSpeed }) => {
+const WeatherCanvas = ({ weatherState, isDay, isGoldenHour, windSpeed }) => {
   const { color, state } = weatherState;
 
   // Indigo for night, or use the mapping color for day
-  const skyColor = isDay ? color : "#1A1A2E";
+  let skyColor = isDay ? color : "#1A1A2E";
+
+  // If it's Golden Hour, override the blue with a warm peach/orange
+  if (isGoldenHour) skyColor = "#FF9E5E";
 
   const bunnyVariants = {
     SUNNY: { x: 220, y: 160, scale: 1, opacity: 1 },
@@ -24,18 +27,28 @@ const WeatherCanvas = ({ weatherState, isDay, windSpeed }) => {
       <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
         
         {/* SKY */}
-      <motion.rect width="400" height="225" animate={{ fill: skyColor }} transition={{ duration: 2 }} />
+      <motion.rect width="400" height="225" animate={{ fill: skyColor }} transition={{ duration: 3 }} />
 
-      {/* MOON (Only at Night) */}
-      {!isDay && (
-        <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <circle cx="340" cy="40" r="12" fill="#F0F0F0" />
-          <circle cx="348" cy="35" r="12" fill={skyColor} /> {/* Moon Crescent Effect */}
-        </motion.g>
-      )}
+        {/* GOLDEN GLOW OVERLAY */}
+        {isGoldenHour && (
+          <motion.rect
+            width="400" height="225"
+            fill="url(#goldGradient)"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+          />
+        )}
+
+        {/* MOON (Only at Night) */}
+        {!isDay && (
+          <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <circle cx="340" cy="40" r="12" fill="#F0F0F0" />
+            <circle cx="348" cy="35" r="12" fill={skyColor} /> {/* Moon Crescent Effect */}
+          </motion.g>
+        )}
 
         {/* SUN */}
-        {state === 'SUNNY' && (
+        {isDay && state === 'SUNNY' && (
           <motion.g initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <circle cx="340" cy="40" r="20" fill="yellow" className="animate-pulse" opacity="0.4" />
             <circle cx="340" cy="40" r="12" fill="#FFD700" />
@@ -184,6 +197,27 @@ const WeatherCanvas = ({ weatherState, isDay, windSpeed }) => {
             ))}
           </g>
         )}
+
+        {/* SUNSET GLOW - Overlay that appears briefly during transition */}
+        {/* {isDay && (
+          <motion.rect
+            width="400"
+            height="225"
+            fill="orange"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.1 }} // Subtle warmth
+            transition={{ duration: 2 }}
+          />
+        )} */}
+
+
+        {/* Define the gradient at the bottom of your SVG */}
+        <defs>
+          <linearGradient id="goldGradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="#FFD700" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#FF8C00" stopOpacity="0" />
+          </linearGradient>
+        </defs>
       </svg>
     </div>
   );

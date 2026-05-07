@@ -59,6 +59,8 @@ function App() {
   }, [data]);
   
   const dayTimeStatus = data ? isDaytime(data.dt, data.sunrise, data.sunset) : true;
+  const isGoldenHour = data ? (data.dt > data.sunset - 3600 && data.dt < data.sunset) : false;
+// Use this to set a soft orange bgColor before it turns to Night indigo!
   return (
   <div className="min-h-screen flex flex-col items-center p-6 gap-6 font-sans" style={{ backgroundColor: bgColor }}>
     {/* Search Input */}
@@ -86,7 +88,8 @@ function App() {
         {/* The Visual Scene */}
         <WeatherCanvas 
           weatherState={getBunnyState(data.condition)} 
-          isDay={dayTimeStatus} 
+          isDay={dayTimeStatus}
+          isGoldenHour={isGoldenHour} 
           windSpeed={data.wind.speed}
         />
 
