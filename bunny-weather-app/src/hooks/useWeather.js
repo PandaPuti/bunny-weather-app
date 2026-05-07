@@ -27,6 +27,10 @@ export const useWeather = (city) => {
           wind: result.wind.speed,
           humidity:result.main.humidity,
           result: result,
+          dt: result.dt,
+          sunrise: result.sys.sunrise,
+          sunset: result.sys.sunset,
+          city: result.name
         });
       } catch (err) {
         setError(err.message);
