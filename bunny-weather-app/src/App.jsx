@@ -14,7 +14,6 @@ function App() {
   const [inputCity, setInputCity] = useState('');
   const [bgColor, setBgColor] = useState('#f8fafc'); // Default slate-50
   const { data, loading, error } = useWeather(city);
-  // console.log(data);
   const { thought, isThinking, generateThought } = useAINarrator();
 
   useEffect(() => {
