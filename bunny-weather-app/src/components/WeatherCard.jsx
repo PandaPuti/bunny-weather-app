@@ -7,8 +7,8 @@ import { getWeatherDateTime } from '../utils/weatherDateTime';
 const WeatherCard = ({ data }) => {
   if (!data) return null;
   const result = getWeatherDateTime(data.dt, data.result.timezone);
-  const sunrise = getWeatherDateTime(data.sunrise, data.result.timezone);
-  const sunset = getWeatherDateTime(data.sunset, data.result.timezone);
+  const sunrise = getWeatherDateTime(data.sunrise, data.timeZone);
+  const sunset = getWeatherDateTime(data.sunset, data.timeZone);
 
   return (
     <div className="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-xl w-full max-w-md border border-white/50">
@@ -35,7 +35,7 @@ const WeatherCard = ({ data }) => {
           </div>
           <div>
             <p className="text-[10px] text-gray-400 uppercase font-bold">Min Temp</p>
-            <p className="font-bold text-gray-700">{Math.round(data.result.main.temp_min)}</p> 
+            <p className="font-bold text-gray-700">{data.minTemp}</p> 
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -44,7 +44,7 @@ const WeatherCard = ({ data }) => {
           </div>
           <div>
             <p className="text-[10px] text-gray-400 uppercase font-bold">Max Temp</p>
-            <p className="font-bold text-gray-700">{Math.round(data.result.main.temp_max)}</p>
+            <p className="font-bold text-gray-700">{data.maxTemp}</p>
           </div>
         </div>
       </div>

@@ -97,12 +97,12 @@ const WeatherCanvas = ({ weatherState, isDay, windSpeed }) => {
           <path d="M150 110 Q 250 135 350 110" stroke="#5D4037" strokeWidth="1" fill="none" />
           <rect x="150" y="100" width="10" height="75" fill="#5D4037"></rect>
           <rect x="350" y="105" width="10" height="75" fill="#5D4037"></rect>
-          {(state === 'SUNNY' || state === 'CLOUDY') && (
+          {/* {isDay && (state === 'SUNNY' || state === 'CLOUDY') && (
             <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <rect x="190" y="122" width="15" height="20" fill="#FFEB3B" className="animate-sway" />
               <rect x="250" y="128" width="18" height="25" fill="#03A9F4" className="animate-sway [animation-delay:0.5s]" />
             </motion.g>
-          )}
+          )} */}
         </g>
 
         {/* THE BUNNY */}
@@ -154,7 +154,7 @@ const WeatherCanvas = ({ weatherState, isDay, windSpeed }) => {
         )}
 
         {/* CLOTHES WITH DYNAMIC SWING */}
-        <motion.g 
+        {isDay && (state === 'SUNNY' || state === 'CLOUDY' || state === 'FOGGY') && (<motion.g 
           className="origin-top"
           animate={{ rotate: [-3, 3, -3] }}
           transition={{ 
@@ -163,8 +163,10 @@ const WeatherCanvas = ({ weatherState, isDay, windSpeed }) => {
             ease: "easeInOut" 
           }}
         >
-          <rect x="190" y="122" width="15" height="20" fill="#FFEB3B" />
-        </motion.g>
+          <rect x="190" y="120" width="15" height="20" fill="#d53ed2" />
+          <rect x="230" y="120" width="15" height="20" fill="#FFEB3B" />
+          <rect x="280" y="120" width="18" height="25" fill="#03A9F4" />
+        </motion.g>)}
 
         {/* STARS - Only at Night */}
         {!isDay && (

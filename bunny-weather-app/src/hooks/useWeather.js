@@ -30,7 +30,10 @@ export const useWeather = (city) => {
           dt: result.dt,
           sunrise: result.sys.sunrise,
           sunset: result.sys.sunset,
-          city: result.name
+          city: result.name,
+          minTemp:Math.round(result.main.temp_min),
+          maxTemp:Math.round(result.main.temp_max),
+          timeZone: result.timezone,
         });
       } catch (err) {
         setError(err.message);
