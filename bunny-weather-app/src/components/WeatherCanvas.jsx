@@ -85,7 +85,7 @@ const WeatherCanvas = ({ weatherState, isDay, windSpeed }) => {
         <path d="M0 180 Q 200 160 400 180 V 225 H 0 Z" fill="#4CAF50" />
 
         {/* THE HOUSE WINDOW LIGHT*/}
-        <g id="house" transform="translate(30, 130)">
+        <g id="house" transform="translate(30, 140)">
           <rect width="50" height="40" fill="#D32F2F" />
           <path d="M-5 0 L 25 -25 L 55 0 Z" fill="#3E2723" />
           <rect x="18" y="15" width="14" height="25" fill="#5D4037" />
@@ -95,6 +95,8 @@ const WeatherCanvas = ({ weatherState, isDay, windSpeed }) => {
         {/* THE CLOTHESLINE */}
         <g id="laundry">
           <path d="M150 110 Q 250 135 350 110" stroke="#5D4037" strokeWidth="1" fill="none" />
+          <rect x="150" y="100" width="10" height="75" fill="#5D4037"></rect>
+          <rect x="350" y="105" width="10" height="75" fill="#5D4037"></rect>
           {(state === 'SUNNY' || state === 'CLOUDY') && (
             <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <rect x="190" y="122" width="15" height="20" fill="#FFEB3B" className="animate-sway" />
