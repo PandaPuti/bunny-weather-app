@@ -12,7 +12,7 @@ function App() {
   const fallbackCity = 'Mumbai';
   const [city, setCity] = useState(fallbackCity);
   const { data, loading, error } = useWeather(city);
-  console.log(data);
+  // console.log(data);
   const { thought, isThinking, generateThought } = useAINarrator();
 
   useEffect(() => {

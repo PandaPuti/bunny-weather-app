@@ -1,7 +1,7 @@
 import React from 'react';
 import { Thermometer, Wind, Droplets, MapPin, Sunrise, Sunset } from 'lucide-react';
 import { convertTemp } from '../utils/conversions';
-import { convertEpoch } from '../utils/epochConversion';
+// import { convertEpoch } from '../utils/epochConversion';
 import { getWeatherDateTime } from '../utils/weatherDateTime';
 
 const WeatherCard = ({ data }) => {
